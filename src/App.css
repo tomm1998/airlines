@@ -1,10 +1,58 @@
 .App {
-  text-align: center;
+}
+.container{
+  margin-left: 94px;
+  margin-right: 94px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.top-bar{
+  display: flex;
+  width: 100%;
+  background-color: #FFFFFF;
+  height: 60px;
+  border-bottom:  1px solid rgba(0, 0, 0, 0.1) ;
+}
+.top-logo{
+  margin:19px;
+}
+
+.title{
+  margin-top: 67px;
+
+  margin-bottom: 73px;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 44px;
+  font-weight: 900;
+  color: #000000;
+}
+.filter-title{
+  margin-bottom: 23px;
+
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #192024;
+}
+.checkbox-filter{
+  margin-bottom: 56px;
+
+}
+.box-filter{
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+}
+.label-filter{
+  margin-right: 24px;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  color: #192024;
+}
+.body{
+  display: flex;
+  flex-wrap: wrap;
 }
 
 @media (prefers-reduced-motion: no-preference) {
