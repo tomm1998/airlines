@@ -6,10 +6,13 @@ import fetchJsonp from 'fetch-jsonp';
 
 function App() {
   const [airlines, setAirlines] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
+  const [checked, setChecked] = useState([
+    {alliance: "OW", checked: false},
+    {alliance: "ST", checked: false},
+    {alliance: "SA", checked: false}
+  ]);
 
   useEffect(() => {
-
     fetchJsonp("/homework", {
       jsonpCallback: 'jsonp'
     })
@@ -17,19 +20,24 @@ function App() {
       .then((data) => setAirlines(data))
   }, []);
 
-  /*const handleCheckbox = (value, e) => {
-    if (e.target.checked) {
-      let selectedData = data.filter((d) => d.model === value);
-
-      setFilteredData([...filteredData, ...selectedData]);
-    } else {
-      let unselected = filteredData.filter((d) => {
-        return d.model !== value;
-      });
-      setFilteredData(uncheckedData);
-    }
-  }*/
-
+  const handleCheck = (e) => {
+    const newChecked = checked.map((elem, i ) => {
+      if(elem.alliance === e.target.value){
+          elem.checked = e.target.checked;
+          return elem;
+      }
+      else
+         return elem;
+    })
+    setChecked(newChecked);
+    checked.map((e) => {
+      airlines.map((elem, index) => {
+        if(e.checked && e.alliance === elem.alliance)
+          return console.log("<Card key={index} data={elem} />")
+      })
+    })
+  }
+  
   return (
 
     <div className="App">
@@ -46,24 +54,27 @@ function App() {
           </div>
           <div className='checkbox-filter'>
             <label className='label-filter'>
-              <input type='checkbox' id='checkbox-1' className='box-filter' checked={checked[0]} onChange={(e) => handleChange(e)} />
+              <input type='checkbox' id='checkbox-0' value="OW"  onChange={(e) => handleCheck(e)} className='box-filter' />
               Oneworld
             </label>
             <label className='label-filter'>
-              <input type='checkbox' id='checkbox-2' className='box-filter' checked={checked[1]} />
+              <input type='checkbox' id='checkbox-1' value="ST"  onChange={(e) => handleCheck(e)} className='box-filter' />
               Sky Team
             </label>
             <label className='label-filter'>
-              <input type='checkbox' id='checkbox-3' className='box-filter' checked={checked[2]} />
+              <input type='checkbox' id='checkbox-2' value="SA"  onChange={(e) => handleCheck(e)} className='box-filter' />
               Star Alliance
             </label>
           </div>
         </div>
         <div className='body'>
-          {airlines.length > 0 &&
+          { 
+            airlines.length > 0 &&
             airlines.map((elem, index) => {
+              if(checked.every((value)=> value.checked ===false ) ||
+                checked.some((value)=> value.checked=== true && checked.includes((value) => value.alliance === elem.alliance)))
               return <Card key={index} data={elem} />
-            })
+            }) 
           }
         </div>
       </div>
