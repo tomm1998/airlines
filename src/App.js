@@ -1,76 +1,44 @@
-import logo from './Logo.svg';
-import React, {useEffect, useState} from 'react';
+import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Card from './components/Card';
 import fetchJsonp from 'fetch-jsonp';
 
 function App() {
-const[airlines, setAirlines] = useState([]);
-const[checked, setChecked] = useState(false);
-const[checked2, setChecked2] = useState(false);
-const[checked3, setChecked3] = useState(false);
+  const [airlines, setAirlines] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
 
-useEffect( () =>{
-  fetchJsonp("/homework", {
-    jsonpCallback: 'jsonp'
-  })
-  .then((res) => res.json())
-  .then((data) => setAirlines(data))
-}, []);
+  useEffect(() => {
 
-const handleChange = (e) =>{
-  console.log(e);
-    if(!checked){
-      const filteredFlights = airlines.filter( (item) => item.alliance === e.target.value);
-      setAirlines(filteredFlights);
-      setChecked(true);
-    }else{
-      fetchJsonp("/homework", {
-        jsonpCallback: 'jsonp'
-      })
+    fetchJsonp("/homework", {
+      jsonpCallback: 'jsonp'
+    })
       .then((res) => res.json())
       .then((data) => setAirlines(data))
-      .then(setChecked(false));
-    }
-}
-const handleChange2 = () =>{
-  if(!checked2){
-    const filteredFlights = airlines.filter( (item) => item.alliance === 'ST');
-    setAirlines(filteredFlights);
-    setChecked2(true);
-  }else{
-    fetchJsonp("/homework", {
-      jsonpCallback: 'jsonp'
-    })
-    .then((res) => res.json())
-    .then((data) => setAirlines(data))
-    .then(setChecked2(false));
-  }
-}
+  }, []);
 
-const handleChange3 = () =>{
-  if(!checked3){
-    const filteredFlights = airlines.filter( (item) => item.alliance === 'SA' || item.alliance==='ST');
-    setAirlines(filteredFlights);
-    setChecked3(true);
-  }else{
-    fetchJsonp("/homework", {
-      jsonpCallback: 'jsonp'
-    })
-    .then((res) => res.json())
-    .then((data) => setAirlines(data))
-    .then(setChecked3(false));
-  }
-}
+  /*const handleCheckbox = (value, e) => {
+    if (e.target.checked) {
+      let selectedData = data.filter((d) => d.model === value);
+
+      setFilteredData([...filteredData, ...selectedData]);
+    } else {
+      let unselected = filteredData.filter((d) => {
+        return d.model !== value;
+      });
+      setFilteredData(uncheckedData);
+    }
+  }*/
+
   return (
-    
+
     <div className="App">
       <div className='top-bar'>
-        <img src={logo} className='top-logo' alt=''></img>   
+        <img src={logo} className='top-logo' alt=''></img>
       </div>
       <div className='container'>
         <div className='title'>
-            Airlines
+          Airlines
         </div>
         <div className='filter'>
           <div className='filter-title'>
@@ -78,25 +46,25 @@ const handleChange3 = () =>{
           </div>
           <div className='checkbox-filter'>
             <label className='label-filter'>
-              <input type='checkbox' className='box-filter' value='OW' checked={checked} onChange={(e) => handleChange}/>
-                Oneworld
+              <input type='checkbox' id='checkbox-1' className='box-filter' checked={checked[0]} onChange={(e) => handleChange(e)} />
+              Oneworld
             </label>
             <label className='label-filter'>
-              <input type='checkbox' className='box-filter' checked={checked2} onChange={handleChange2}/>
-                Sky Team
+              <input type='checkbox' id='checkbox-2' className='box-filter' checked={checked[1]} />
+              Sky Team
             </label>
             <label className='label-filter'>
-              <input type='checkbox' className='box-filter' checked={checked3} onChange={handleChange3}/>
-                Star Alliance
+              <input type='checkbox' id='checkbox-3' className='box-filter' checked={checked[2]} />
+              Star Alliance
             </label>
           </div>
         </div>
         <div className='body'>
-          {airlines.length>0 && 
+          {airlines.length > 0 &&
             airlines.map((elem, index) => {
               return <Card key={index} data={elem} />
             })
-            }
+          }
         </div>
       </div>
     </div>
