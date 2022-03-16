@@ -16,21 +16,21 @@ else if(data.alliance==='SA')
 
     return (
         <div className="card-container">
-               <img src={"https://www.kayak.com" + data.logoURL} className='logo-airline' alt=''></img>
-               <div className="card-title">
+            <img src={"https://www.kayak.com" + data.logoURL} className='logo-airline' alt=''></img>
+            <div className="card-title">
                {data.name}
-                    <div className="details">
-                        <div className="alliance">
-                            {alliance!=='none' && alliance}
-                        </div>
-                        <div className="phone">
-                            {data.phone}
-                        </div>
-                        <div className="site">
-                            {data.site}
-                        </div>
+                <div className="details">
+                    <div className="alliance">
+                        {alliance!=='none' && alliance}
+                    </div>
+                    <div className="phone">
+                        {data.phone}
+                    </div>
+                    <div className="site">
+                        {data.site}
                     </div>
                 </div>
+            </div>
         </div>
     );
 }
