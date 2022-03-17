@@ -46,14 +46,14 @@ function App() {
           </div>
           <div className='checkbox-filter'>
             {
-              alliances.map((checkbox, index) => {
+              alliances.map((checkbox, index) => 
                 (
                   <label key={index} className='label-filter'>
-                    <input type='checkbox' id={checkbox.code} onChange={(e) => handleCheck(e)} className='box-filter' />
-                      {checkbox.alliance}
+                    <input type='checkbox' data-testid={checkbox.code} id={checkbox.code} onChange={(e) => handleCheck(e)} className='box-filter' />
+                      {checkbox.name}
                   </label>
                 )
-              })
+              )
             }
           </div>
         </div>

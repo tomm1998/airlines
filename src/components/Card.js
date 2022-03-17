@@ -1,9 +1,12 @@
 import React from "react";
 import './Card.css'
+import alliances from '../alliancesFilter'
+
 
 
 function Card({data}) {
 
+    const allianceName = alliances.find(alliance => alliance.code === data.alliance)?.name || data.alliance;
     return (
         <div className="card-container">
             <img src={"https://www.kayak.com" + data.logoURL} className='logo-airline' alt=''></img>
@@ -11,7 +14,7 @@ function Card({data}) {
                 {data.name}
                 <div className="details">
                     <div className="alliance">
-                        {data.alliance}
+                        {allianceName}
                     </div>
                     <div className="phone">
                         {data.phone}
