@@ -12,6 +12,7 @@ function App() {
     {alliance: "SA", checked: false}
   ]);
 
+
   useEffect(() => {
     fetchJsonp("/homework", {
       jsonpCallback: 'jsonp'
@@ -19,6 +20,7 @@ function App() {
       .then((res) => res.json())
       .then((data) => setAirlines(data))
   }, []);
+
 
   const handleCheck = (e) => {
     const newChecked = checked.map((elem, i ) => {
@@ -30,12 +32,6 @@ function App() {
          return elem;
     })
     setChecked(newChecked);
-    checked.map((e) => {
-      airlines.map((elem, index) => {
-        if(e.checked && e.alliance === elem.alliance)
-          return console.log("<Card key={index} data={elem} />")
-      })
-    })
   }
   
   return (
@@ -71,9 +67,15 @@ function App() {
           { 
             airlines.length > 0 &&
             airlines.map((elem, index) => {
-              if(checked.every((value)=> value.checked ===false ) ||
-                checked.some((value)=> value.checked=== true && checked.includes((value) => value.alliance === elem.alliance)))
-              return <Card key={index} data={elem} />
+              if(checked.every((value) => value.checked === false))
+                return <Card key={index} data={elem} />
+              else {
+                for(let i = 0 ; i < checked.length ; i++){
+                  if(checked[i].alliance === elem.alliance && checked[i].checked){
+                    return <Card key={index} data={elem} />
+                  }
+                }
+              }
             }) 
           }
         </div>

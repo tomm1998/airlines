@@ -3,7 +3,6 @@ import './Card.css'
 
 
 function Card(props) {
-
     const data = props.data;
     let alliance = 'none';
     if (data.alliance === 'OW')

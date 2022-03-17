@@ -1,10 +1,7 @@
-
 .container{
   margin-left: 94px;
   margin-right: 94px;
 }
-
-
 .top-bar{
   display: flex;
   width: 100%;
@@ -15,7 +12,6 @@
 .top-logo{
   margin:19px;
 }
-
 .title{
   margin-top: 67px;
   margin-bottom: 73px;
@@ -33,7 +29,6 @@
 }
 .checkbox-filter{
   margin-bottom: 56px;
-
 }
 .box-filter{
   margin-right: 10px;
