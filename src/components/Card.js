@@ -2,22 +2,22 @@ import React from "react";
 import './Card.css'
 
 
-function Card(props) {
+function Card({data}) {
 
     return (
         <div className="card-container">
-            <img src={"https://www.kayak.com" + props.data.logoURL} className='logo-airline' alt=''></img>
+            <img src={"https://www.kayak.com" + data.logoURL} className='logo-airline' alt=''></img>
             <div className="card-title">
-                {props.data.name}
+                {data.name}
                 <div className="details">
                     <div className="alliance">
-                        {props.data.alliance}
+                        {data.alliance}
                     </div>
                     <div className="phone">
-                        {props.data.phone}
+                        {data.phone}
                     </div>
                     <div className="site">
-                        {props.data.site}
+                        {data.site}
                     </div>
                 </div>
             </div>

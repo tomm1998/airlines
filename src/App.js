@@ -8,7 +8,7 @@ import alliances from './alliancesFilter'
 
 function App() {
   const [airlines, setAirlines] = useState([]);
-  const [checked, setChecked] = useState(alliances.map(obj => ({ ...obj, check: false })));
+  const [checked, setChecked] = useState(alliances.map(alliance => ({ ...alliance, check: false })));
 
   useEffect(() => {
     fetchJsonp("/homework", {
@@ -26,7 +26,7 @@ function App() {
           return elem;
       }
       else
-         return elem;
+          return elem;
     })
     setChecked(newChecked);
   }
@@ -47,7 +47,7 @@ function App() {
           <div className='checkbox-filter'>
             {
               alliances.map((checkbox, index) => {
-                return (
+                (
                   <label key={index} className='label-filter'>
                     <input type='checkbox' id={checkbox.code} onChange={(e) => handleCheck(e)} className='box-filter' />
                       {checkbox.alliance}
