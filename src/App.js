@@ -3,15 +3,12 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import Card from './components/Card';
 import fetchJsonp from 'fetch-jsonp';
+import alliances from './alliancesFilter'
+
 
 function App() {
   const [airlines, setAirlines] = useState([]);
-  const [checked, setChecked] = useState([
-    {alliance: "OW", checked: false},
-    {alliance: "ST", checked: false},
-    {alliance: "SA", checked: false}
-  ]);
-
+  const [checked, setChecked] = useState(alliances.map(obj => ({ ...obj, check: false })));
 
   useEffect(() => {
     fetchJsonp("/homework", {
@@ -23,9 +20,9 @@ function App() {
 
 
   const handleCheck = (e) => {
-    const newChecked = checked.map((elem, i ) => {
-      if(elem.alliance === e.target.value){
-          elem.checked = e.target.checked;
+    const newChecked = checked.map((elem ) => {
+      if(elem.code === e.target.id){
+          elem.check = e.target.checked;
           return elem;
       }
       else
@@ -35,7 +32,6 @@ function App() {
   }
   
   return (
-
     <div className="App">
       <div className='top-bar'>
         <img src={logo} className='top-logo' alt=''></img>
@@ -49,30 +45,28 @@ function App() {
             Filter by Alliances
           </div>
           <div className='checkbox-filter'>
-            <label className='label-filter'>
-              <input type='checkbox' id='checkbox-0' value="OW"  onChange={(e) => handleCheck(e)} className='box-filter' />
-              Oneworld
-            </label>
-            <label className='label-filter'>
-              <input type='checkbox' id='checkbox-1' value="ST"  onChange={(e) => handleCheck(e)} className='box-filter' />
-              Sky Team
-            </label>
-            <label className='label-filter'>
-              <input type='checkbox' id='checkbox-2' value="SA"  onChange={(e) => handleCheck(e)} className='box-filter' />
-              Star Alliance
-            </label>
+            {
+              alliances.map((checkbox, index) => {
+                return (
+                  <label key={index} className='label-filter'>
+                    <input type='checkbox' id={checkbox.code} onChange={(e) => handleCheck(e)} className='box-filter' />
+                      {checkbox.alliance}
+                  </label>
+                )
+              })
+            }
           </div>
         </div>
         <div className='body'>
           { 
             airlines.length > 0 &&
             airlines.map((elem, index) => {
-              if(checked.every((value) => value.checked === false))
+              if(checked.every((value) => value.check === false))
                 return <Card key={index} data={elem} />
               else {
-                for(let i = 0 ; i < checked.length ; i++){
-                  if(checked[i].alliance === elem.alliance && checked[i].checked){
-                    return <Card key={index} data={elem} />
+                for(let i = 0 ; i < checked.length ; i++) {
+                  if(checked[i].code === elem.alliance && checked[i].check) {
+                    return <Card key={index} data={elem}  />
                   }
                 }
               }
