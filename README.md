@@ -1,7 +1,7 @@
 A small project for a job interview to kayak in react
 
 
-##Install and run
+## Install and run
 cd kayak-coding-exercise
 npm install
 npm start
