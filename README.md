@@ -1,4 +1,4 @@
-A small project for a job interview to kayak in react
+a small exercixe of a coding challenge for a frontend developer position
 
 
 ## Install and run
