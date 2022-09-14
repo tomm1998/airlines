@@ -1,4 +1,4 @@
-a small exercixe of a coding challenge for a frontend developer position
+an exercise of a coding challenge for a frontend developer position
 
 
 ## Install and run
